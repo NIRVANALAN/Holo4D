@@ -1,0 +1,20 @@
+{
+  "format": "holo4d_ready_to_run_demo_outputs_v1",
+  "resolution": [672, 384],
+  "seed": 42,
+  "num_inference_steps": 50,
+  "cfg_scale": 5.0,
+  "sigma_shift": 5.0,
+  "outputs": [
+    {
+      "file": "t2v_49_chunk.mp4",
+      "frames": 49,
+      "sha256": "c23cea5626f2ee435381d35448bdc28131fdb510852f209f94032dd02d99e71a"
+    },
+    {
+      "file": "i2v_49_plus_48_rollout.mp4",
+      "frames": 97,
+      "sha256": "bb4b4e5cc701e4355a2ed707b78536474de458445772851793f94bde90259a45"
+    }
+  ]
+}

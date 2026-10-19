@@ -1,0 +1,43 @@
+# Fixed-frame-0 I2V continuation training with 25% OmniDROID.
+#
+# OmniDROID uses an identity-camera src->src target for 10% of its own samples
+# (2.5% of all batches). Every sample exposes one truthful frame-0 query, matching
+# the generated-boundary condition consumed by each rollout continuation chunk.
+
+num_views: 49
+resolution: [672, 384]
+
+syn4d_root: ${oc.env:SYN4D_ROOT}
+syn4d_caption_dir: ${oc.env:SYN4D_CAPTION_DIR}
+syn4d_valid_sequences: config/syn4d_valid_sequences.txt
+dl3dv_root: ${oc.env:DL3DV_ROOT}
+mvs_synth_root: ${oc.env:MVS_SYNTH_ROOT}
+
+omni_root: ${oc.env:OMNI_DROID_ROOT}
+omni_index: ${oc.env:OMNI_DROID_INDEX}
+omni_cache_manifest: ${oc.env:OMNI_DROID_CACHE_MANIFEST}
+droid_index: ${oc.env:DROID_NVS_INDEX}
+omni_caption_dir: ${oc.env:OMNI_CAPTION_DIR}
+omni_same_view_prob: ${oc.env:TRACK4D360_OMNI_SAME_VIEW_PROB,0.1}
+
+recammaster_caption_cache_dir: ${oc.env:RECAMMASTER_CAPTION_CACHE_DIR}
+recammaster_root: ${oc.env:RECAMMASTER_ROOT}
+multicam_fg_mask_root: ${oc.env:MULTICAM_FG_MASK_ROOT}
+recammaster_source49_root: ${oc.env:RECAMMASTER_SOURCE49_ROOT}
+recammaster_pair1x49_label_root: ${oc.env:RECAMMASTER_PAIR1X49_LABEL_ROOT}
+recammaster_cow_root: ${oc.env:RECAMMASTER_COW_ROOT}
+recammaster_scene_offset_per_k: ${oc.env:TRACK4D360_RECAM_SCENE_OFFSET_PER_K,0}
+recammaster_scene_limit_per_k: ${oc.env:TRACK4D360_RECAM_SCENE_LIMIT_PER_K,750}
+
+multi_query_prob: ${oc.env:TRACK4D360_MULTI_QUERY_PROB,0.0}
+multi_query_choices: ${oc.env:TRACK4D360_MULTI_QUERY_CHOICES,1}
+multi_query_schedule: canonical_random_subset
+static_multi_query_visibility: surface
+
+train_datasets:
+  - "62500 @ OMNI_DROID_NVS(ROOT='${omni_root}', index_file='${omni_index}', pw_index_file='${droid_index}', cache_manifest='${omni_cache_manifest}', caption_dir='${omni_caption_dir}', require_optimized_extrinsics=False, num_views=${num_views}, resolution=${resolution}, steps_per_epoch=62500, track_spatial_stride=1, frame_stride=2, swap_src_tgt_prob=0.5, same_view_prob=${omni_same_view_prob}, return_source_depth_video=True, return_source_rgb_video=True, return_source_cameras=True, return_target_depth=True)"
+  - "39375 @ ReCamMasterCowVGGT_NVS(ROOT='${recammaster_root}', vggt_root='${recammaster_source49_root}', source_vggt_root='${recammaster_source49_root}', pair1x49_label_root='${recammaster_pair1x49_label_root}', geometry_source='pair1x49_label_scale_only', cow_root='${recammaster_cow_root}', fg_mask_root='${multicam_fg_mask_root}', caption_cache_dir='${recammaster_caption_cache_dir}', num_views=${num_views}, resolution=${resolution}, steps_per_epoch=39375, return_source_depth_video=True, return_source_rgb_video=True, return_source_cameras=True, vggt_post_crop_mode='cow_aspect', rgb_post_crop_mode='cow_aspect', track_sample_mode='all', track_stride=1, track_samples=0, scene_offset_per_k=${recammaster_scene_offset_per_k}, scene_limit_per_k=${recammaster_scene_limit_per_k})"
+  - "16875 @ ReCamMasterCowVGGT_NVS(ROOT='${recammaster_root}', vggt_root='${recammaster_source49_root}', source_vggt_root='${recammaster_source49_root}', pair1x49_label_root='${recammaster_pair1x49_label_root}', geometry_source='pair1x49_label_scale_only', cow_root='${recammaster_cow_root}', fg_mask_root='${multicam_fg_mask_root}', caption_cache_dir='${recammaster_caption_cache_dir}', num_views=${num_views}, resolution=${resolution}, steps_per_epoch=16875, return_source_depth_video=True, return_source_rgb_video=True, return_source_cameras=True, vggt_post_crop_mode='cow_aspect', rgb_post_crop_mode='cow_aspect', track_sample_mode='grid', track_stride=2, track_samples=0, scene_offset_per_k=${recammaster_scene_offset_per_k}, scene_limit_per_k=${recammaster_scene_limit_per_k})"
+  - "75000 @ Syn4D_Multi_NVS(ROOT='${syn4d_root}', caption_dir='${syn4d_caption_dir}', num_views=${num_views}, resolution=${resolution}, steps_per_epoch=75000, track_spatial_stride=1, exclude_scenes=['flying_group'], valid_sequences_file='${syn4d_valid_sequences}', use_mp4_rgb=True, return_source_depth_video=True, return_source_rgb_video=True, return_source_cameras=True, return_dynamic_masks=True, multi_query_prob=${multi_query_prob}, multi_query_choices='${multi_query_choices}', multi_query_schedule='${multi_query_schedule}')"
+  - "37500 @ GeometryRobustnessWrapper_NVS(StaticScene_NVS(ROOT='${dl3dv_root}', dataset_type='dl3dv', num_views=${num_views}, resolution=${resolution}, steps_per_epoch=37500, track_spatial_stride=1, min_overlap_ratio=0.25, min_shift_ratio=0.15, max_shift_ratio=0.5, shift_beta_ab=[2.0, 5.0], src_center_in_target_prob=0.5, return_source_depth_video=True, return_source_rgb_video=True, return_source_cameras=True, use_da3_depth=True), multi_query_prob=${multi_query_prob}, multi_query_choices='${multi_query_choices}', multi_query_schedule='${multi_query_schedule}', static_multi_query_visibility='${static_multi_query_visibility}', noise_prob=0.0, sparse_track_prob=0.0)"
+  - "18750 @ GeometryRobustnessWrapper_NVS(StaticScene_NVS(ROOT='${mvs_synth_root}', dataset_type='mvs_synth', num_views=${num_views}, resolution=${resolution}, steps_per_epoch=18750, track_spatial_stride=1, min_overlap_ratio=0.25, return_source_depth_video=True, return_source_rgb_video=True, return_source_cameras=True, exclude_sequence_ids=['0000']), multi_query_prob=${multi_query_prob}, multi_query_choices='${multi_query_choices}', multi_query_schedule='${multi_query_schedule}', static_multi_query_visibility='${static_multi_query_visibility}', noise_prob=0.0, sparse_track_prob=0.0)"

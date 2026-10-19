@@ -1,0 +1,20 @@
+# Track4D-360: Track module configuration.
+# Reference: Koichi's point-track architecture (code_planning/point_track_architecture.md)
+#   - 156-dim consistent throughout embedder/adapter
+#   - 1:1 block-to-latent-token mapping (block = 1 latent position)
+# block_t/h/w are set to (1,1,1) in latent space, auto-configured in pipeline code.
+#
+# Key difference from Koichi: embedder input is 3D world coords (5 channels:
+# frame_idx, world_x, world_y, world_z, vis) instead of 2D projected (4 channels).
+# Sinusoidal + MLP preserves high-freq 3D info better than VAE (per Koichi).
+
+track:
+  in_channels: 5       # (frame_idx, world_x, world_y, world_z, vis)
+  embed_dim: 156
+  num_freqs: 16
+  hidden_dim: 156
+  num_mlp_layers: 3
+  adapter_type: scatter    # "scatter" (PointTrackAdapter, Koichi-style max-pool) or
+                           # "conv_patchify" (DenseTrackConvAdapter, learnable Conv2d)
+  conv_proj_dim: 32        # intermediate dim for conv_patchify adapter
+  conv_track_stride: 4     # track spatial stride (for conv patch_size = spatial_div / stride)

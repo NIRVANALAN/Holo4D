@@ -1,0 +1,23 @@
+{
+  "format": "holo4d_raw_pair_smoke_v1",
+  "license": "synthetic, generated for this repository; no external dataset content",
+  "frames": 9,
+  "height": 96,
+  "width": 160,
+  "track_count": 64,
+  "fps": 12,
+  "npz_sha256": "0fc20f684d928bdde38f17fc4cc5feea9972bd6158404c8ad28abbf0fa010bd0",
+  "keys": [
+    "source_video",
+    "target_video",
+    "source_cam2world",
+    "target_cam2world",
+    "source_intrinsics",
+    "target_intrinsics",
+    "source_depth_video",
+    "tracks_world",
+    "tracks_world_valid_mask",
+    "prompt",
+    "fps"
+  ]
+}

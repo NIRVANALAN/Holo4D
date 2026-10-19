@@ -1,0 +1,16 @@
+# Opt-in GWTT-inspired identity path on target tokens only.
+# Legacy Conv3D RGB-D conditioning remains active and unchanged.
+
+track:
+  in_channels: 9
+  embed_dim: 156
+  num_freqs: 16
+  hidden_dim: 156
+  num_mlp_layers: 3
+  adapter_type: conv3d_patchify
+  conv_proj_dim: 32
+  conv_track_stride: 4
+  conv3d_num_residual_blocks: 1
+  coordinate_mode: world_xyz
+  persistent_identity_mode: target
+  persistent_identity_dim: 128

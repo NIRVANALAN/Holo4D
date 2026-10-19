@@ -1,0 +1,125 @@
+{
+  "cfg_scale": 5.0,
+  "checkpoint": "t2v_49_chunk.safetensors",
+  "focal_ratio_transfer": true,
+  "generated_with": "inference/sample_vista4d.sh",
+  "num_inference_steps": 50,
+  "outputs": [
+    {
+      "bytes": 1937269,
+      "file": "avocado-slice__close-crane-above.mp4",
+      "frames": 49,
+      "height": 384,
+      "sha256": "d83614507f0c1b281bb4bd2f2f1ad2399ebda9bc905637e0d29bcdaf88b50bd2",
+      "slurm_validation_job": 4271,
+      "source": "avocado-slice",
+      "trajectory": "close-crane-above",
+      "width": 672
+    },
+    {
+      "bytes": 1899156,
+      "file": "avocado-slice__left-front-zoom.mp4",
+      "frames": 49,
+      "height": 384,
+      "sha256": "1121c0ca950e24a120b932733032118b5468c586c0d190ef00d6b318da5976a8",
+      "slurm_validation_job": 4271,
+      "source": "avocado-slice",
+      "trajectory": "left-front-zoom",
+      "width": 672
+    },
+    {
+      "bytes": 2420776,
+      "file": "basketball-four__right-left.mp4",
+      "frames": 49,
+      "height": 384,
+      "sha256": "28de9e92c2322d4dac187e173ccbd2d9d1f73b765620ef0ee9412ec7423e12ca",
+      "slurm_validation_job": 4261,
+      "source": "basketball-four",
+      "trajectory": "right-left",
+      "width": 672
+    },
+    {
+      "bytes": 2502091,
+      "file": "basketball-four__shoulder-out.mp4",
+      "frames": 49,
+      "height": 384,
+      "sha256": "4dd87954171e08711782d0f351ae8beef8a5d4d70dfc3b068888143a34188943",
+      "slurm_validation_job": 4261,
+      "source": "basketball-four",
+      "trajectory": "shoulder-out",
+      "width": 672
+    },
+    {
+      "bytes": 1382652,
+      "file": "bed-shopping__dolly-out.mp4",
+      "frames": 49,
+      "height": 384,
+      "sha256": "9014dc3e5520e3aa42d2a4fecf522ea03fbea049287c57c4767b4c89d1f4a08a",
+      "slurm_validation_job": 4264,
+      "source": "bed-shopping",
+      "trajectory": "dolly-out",
+      "width": 672
+    },
+    {
+      "bytes": 1664801,
+      "file": "bed-shopping__top-arc.mp4",
+      "frames": 49,
+      "height": 384,
+      "sha256": "45876bcc6fcd907d429c266332f24e4c56058524bf8b1cbdf818decb377da564",
+      "slurm_validation_job": 4264,
+      "source": "bed-shopping",
+      "trajectory": "top-arc",
+      "width": 672
+    },
+    {
+      "bytes": 3269479,
+      "file": "bmx-bumps__crane-follow-zoom.mp4",
+      "frames": 49,
+      "height": 384,
+      "sha256": "34cae39571ca8217ecc5b85510925c113f923a5e12f86368d4b134a928d37829",
+      "slurm_validation_job": 4265,
+      "source": "bmx-bumps",
+      "trajectory": "crane-follow-zoom",
+      "width": 672
+    },
+    {
+      "bytes": 3383459,
+      "file": "bmx-bumps__front-follow.mp4",
+      "frames": 49,
+      "height": 384,
+      "sha256": "093e82f4fc36be7e57cbc6164ade2313e18fe24fd85347f3ab5cdbf20acff9f1",
+      "slurm_validation_job": 4265,
+      "source": "bmx-bumps",
+      "trajectory": "front-follow",
+      "width": 672
+    },
+    {
+      "bytes": 3379425,
+      "file": "breakdance__crane-dolly-zoom.mp4",
+      "frames": 49,
+      "height": 384,
+      "sha256": "1378807d25d14a4e912cac782bff3f63cd43faeb8ed30116bf282965940d5e07",
+      "slurm_validation_job": 4266,
+      "source": "breakdance",
+      "trajectory": "crane-dolly-zoom",
+      "width": 672
+    },
+    {
+      "bytes": 3491936,
+      "file": "breakdance__left-right.mp4",
+      "frames": 49,
+      "height": 384,
+      "sha256": "00aaa1d770404dc847328861b55d8231f01243da480a9d741df694d5a7bf363b",
+      "slurm_validation_job": 4266,
+      "source": "breakdance",
+      "trajectory": "left-right",
+      "width": 672
+    }
+  ],
+  "protocol": "Holo4D canonical Vista4D 384p V2V sampling",
+  "seed": 42,
+  "sigma_shift": 5.0,
+  "target_scale_alignment": "static frame-0 depth",
+  "trajectory_anchor": "source_frame0",
+  "trajectory_damping": 0.5
+}

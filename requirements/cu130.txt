@@ -1,0 +1,12 @@
+# CUDA 13.0 profile for Python 3.12 on Linux x86_64.
+# Install before the base project: pip install -r requirements/cu130.txt && pip install -e .
+--index-url https://download.pytorch.org/whl/cu130
+--extra-index-url https://pypi.org/simple
+
+torch==2.9.0
+torchvision==0.24.0
+numpy>=2.0.0,<2.8.0
+flash-attn @ https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu13torch2.9cxx11abiTRUE-cp312-cp312-linux_x86_64.whl
+xfuser[flash-attn]>=0.4.3
+torch-cluster @ https://data.pyg.org/whl/torch-2.9.0%2Bcu130/torch_cluster-1.6.3%2Bpt29cu130-cp312-cp312-linux_x86_64.whl
+xformers==0.0.33.post1

@@ -1,0 +1,17 @@
+# Opt-in GWTT-inspired shared identity path.
+# The same persistent trajectory embedding is rasterized onto source and target
+# tokens; legacy Conv3D RGB-D target conditioning remains active.
+
+track:
+  in_channels: 9
+  embed_dim: 156
+  num_freqs: 16
+  hidden_dim: 156
+  num_mlp_layers: 3
+  adapter_type: conv3d_patchify
+  conv_proj_dim: 32
+  conv_track_stride: 4
+  conv3d_num_residual_blocks: 1
+  coordinate_mode: world_xyz
+  persistent_identity_mode: shared
+  persistent_identity_dim: 128

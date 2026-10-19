@@ -1,0 +1,20 @@
+# Track4D-360: Conv3d patchify + per-frame source depth (6 channels).
+#
+# Extends default_conv3d_patchify.yaml with source_depth_at_tracks as channel 6.
+# Channels: (frame_idx, world_x, world_y, world_z, vis, source_depth)
+#
+# The source depth is the per-frame metric depth at each track grid pixel,
+# divided by common_scale, then min-max normalized to [0, 1] per sample.
+# This provides per-frame geometric context: at each source pixel, what depth
+# does the source camera see NOW (not just what it saw at frame 0).
+
+track:
+  in_channels: 6       # (frame_idx, world_x, world_y, world_z, vis, source_depth)
+  embed_dim: 156
+  num_freqs: 16
+  hidden_dim: 156
+  num_mlp_layers: 3
+  adapter_type: conv3d_patchify
+  conv_proj_dim: 32
+  conv_track_stride: 4
+  conv3d_num_residual_blocks: 1

@@ -1,0 +1,85 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Holo4D · prepared examples</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f4f6fa;color:#12243a;font:16px system-ui,sans-serif}main{max-width:1150px;margin:auto;padding:32px 20px}h1{font-size:38px;margin-bottom:8px}p{line-height:1.6;color:#526278}article{background:white;border:1px solid #dce4ef;border-radius:16px;padding:24px;margin:24px 0}h2{font-size:22px;margin:0}h3{font-size:14px;color:#526278}.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}.pair video{width:100%;height:320px;object-fit:contain;background:#edf1f6;border-radius:10px}button{cursor:pointer;padding:11px 16px;margin:16px 8px 8px 0;border-radius:8px;border:1px solid #326ad0;color:#326ad0;background:white}.play{background:#326ad0;color:white}.badge{font-size:13px;background:#edf3ff;padding:8px;border-radius:6px}code{white-space:pre-wrap}details{margin-top:10px}a{color:#326ad0}@media(max-width:650px){.pair{grid-template-columns:1fr}.pair video{height:260px}main{padding:20px 12px}}
+</style></head><body><main><h1>Holo4D examples</h1>
+<p>Five DAVIS sources and five robot sources. Dense geometry, captions and target cameras are included in the prepared pack. Videos are loaded only when you select a pair; all other cards show their first frame.</p>
+<p>Bear and Figure0 use fresh public 14B 50-step validation outputs. Other cards show the pack's archived qualitative references, not newly reproduced outputs or ground truth. Portrait images keep their native aspect ratio. Source media retain their upstream rights.</p>
+<p><a href="../../README.md">README</a> · <a href="../../doc/visualization.md">Visualization guide</a></p>
+<article><h2>davis_bear</h2><p>DAVIS · 4rc · 384×672 H×W · pan_left</p>
+<p class="badge">Fresh public 14B · 50 steps · CFG 5 · shift 5 · seed 42</p>
+<div class="pair"><div><h3>Source</h3><video controls playsinline preload="none" poster="posters/davis_bear_source.jpg" data-src="https://huggingface.co/yslan/Holo4D-2026/resolve/974e77018656957a6baf784cbfe9f9788186b5f3/examples/robot_davis10/davis_bear/source.mp4"></video></div>
+<div><h3>Novel view</h3><video controls playsinline preload="none" poster="posters/davis_bear_prediction.jpg" data-src="generated/davis_bear.mp4"></video></div></div>
+<button class="play">Load and play this pair</button><button class="copy" data-command="EXAMPLE=davis_bear bash inference/demo_examples.sh">Copy inference command</button>
+<details><summary>Caption and reproduction</summary><p>A brown bear is seen in an enclosure with a stone wall background and large rocks scattered around. The bear begins to move slowly towards the left side of the frame, stepping over rocks and walking on a dirt path. The bear continues its steady movement, maintaining a consistent pace as it progresses further to the left. The bear&#x27;s fur appears slightly wet, and it keeps its head slightly lowered as it walks. The bear&#x27;s path is surrounded by a mix of dirt and small plants, with the stone wall and rocks remaining constant in the background.</p><code>EXAMPLE=davis_bear bash inference/demo_examples.sh</code></details></article>
+<article><h2>davis_blackswan</h2><p>DAVIS · cow_vggt · 384×672 H×W · pan_down</p>
+<p class="badge">Archived qualitative reference · recipe may differ; regenerate with the command below</p>
+<div class="pair"><div><h3>Source</h3><video controls playsinline preload="none" poster="posters/davis_blackswan_source.jpg" data-src="https://huggingface.co/yslan/Holo4D-2026/resolve/974e77018656957a6baf784cbfe9f9788186b5f3/examples/robot_davis10/davis_blackswan/source.mp4"></video></div>
+<div><h3>Novel view</h3><video controls playsinline preload="none" poster="posters/davis_blackswan_prediction.jpg" data-src="https://huggingface.co/yslan/Holo4D-2026/resolve/974e77018656957a6baf784cbfe9f9788186b5f3/examples/robot_davis10/davis_blackswan/reference.mp4"></video></div></div>
+<button class="play">Load and play this pair</button><button class="copy" data-command="EXAMPLE=davis_blackswan bash inference/demo_examples.sh">Copy inference command</button>
+<details><summary>Caption and reproduction</summary><p>A black swan with a red beak and white markings on its face is swimming in a greenish pond. The background consists of a concrete edge with green foliage and some scattered debris. The swan maintains a steady position in the water, occasionally moving slightly forward.</p><code>EXAMPLE=davis_blackswan bash inference/demo_examples.sh</code></details></article>
+<article><h2>davis_bike-packing</h2><p>DAVIS · 4rc · 384×672 H×W · pan_down</p>
+<p class="badge">Archived qualitative reference · recipe may differ; regenerate with the command below</p>
+<div class="pair"><div><h3>Source</h3><video controls playsinline preload="none" poster="posters/davis_bike-packing_source.jpg" data-src="https://huggingface.co/yslan/Holo4D-2026/resolve/974e77018656957a6baf784cbfe9f9788186b5f3/examples/robot_davis10/davis_bike-packing/source.mp4"></video></div>
+<div><h3>Novel view</h3><video controls playsinline preload="none" poster="posters/davis_bike-packing_prediction.jpg" data-src="https://huggingface.co/yslan/Holo4D-2026/resolve/974e77018656957a6baf784cbfe9f9788186b5f3/examples/robot_davis10/davis_bike-packing/reference.mp4"></video></div></div>
+<button class="play">Load and play this pair</button><button class="copy" data-command="EXAMPLE=davis_bike-packing bash inference/demo_examples.sh">Copy inference command</button>
+<details><summary>Caption and reproduction</summary><p>In a cozy indoor setting with wooden floors, a staircase, and various furniture, a man wearing a cap, a black and white cycling jersey, and camouflage shorts is seen working on a bicycle. He begins by holding the bicycle upright and then starts to lift the front wheel off the ground. As he continues, he fully inverts the bicycle, positioning the front wheel downwards and the rear wheel upwards. The man then adjusts the bicycle to ensure it is stable in this inverted position.</p><code>EXAMPLE=davis_bike-packing bash inference/demo_examples.sh</code></details></article>
+<article><h2>davis_car-turn</h2><p>DAVIS · 4rc · 384×672 H×W · orbit_right</p>
+<p class="badge">Archived qualitative reference · recipe may differ; regenerate with the command below</p>
+<div class="pair"><div><h3>Source</h3><video controls playsinline preload="none" poster="posters/davis_car-turn_source.jpg" data-src="https://huggingface.co/yslan/Holo4D-2026/resolve/974e77018656957a6baf784cbfe9f9788186b5f3/examples/robot_davis10/davis_car-turn/source.mp4"></video></div>
+<div><h3>Novel view</h3><video controls playsinline preload="none" poster="posters/davis_car-turn_prediction.jpg" data-src="https://huggingface.co/yslan/Holo4D-2026/resolve/974e77018656957a6baf784cbfe9f9788186b5f3/examples/robot_davis10/davis_car-turn/reference.mp4"></video></div></div>
+<button class="play">Load and play this pair</button><button class="copy" data-command="EXAMPLE=davis_car-turn bash inference/demo_examples.sh">Copy inference command</button>
+<details><summary>Caption and reproduction</summary><p>A silver SUV is driving on a winding road surrounded by lush green fields and dense forests, with a backdrop of tall, rocky mountains. The car gradually approaches a curve in the road, maintaining a steady speed as it navigates the turn. The road is bordered by a white line on the left side, and there is a fence running parallel to the road on the left. The sky is clear, and the overall scene is serene and picturesque.</p><code>EXAMPLE=davis_car-turn bash inference/demo_examples.sh</code></details></article>
+<article><h2>davis_bus</h2><p>DAVIS · cow_vggt · 384×672 H×W · orbit_left</p>
+<p class="badge">Archived qualitative reference · recipe may differ; regenerate with the command below</p>
+<div class="pair"><div><h3>Source</h3><video controls playsinline preload="none" poster="posters/davis_bus_source.jpg" data-src="https://huggingface.co/yslan/Holo4D-2026/resolve/974e77018656957a6baf784cbfe9f9788186b5f3/examples/robot_davis10/davis_bus/source.mp4"></video></div>
+<div><h3>Novel view</h3><video controls playsinline preload="none" poster="posters/davis_bus_prediction.jpg" data-src="https://huggingface.co/yslan/Holo4D-2026/resolve/974e77018656957a6baf784cbfe9f9788186b5f3/examples/robot_davis10/davis_bus/reference.mp4"></video></div></div>
+<button class="play">Load and play this pair</button><button class="copy" data-command="EXAMPLE=davis_bus bash inference/demo_examples.sh">Copy inference command</button>
+<details><summary>Caption and reproduction</summary><p>A white and blue bus is seen moving along a road in an urban area, passing by a bus stop and a bench on the sidewalk. The bus continues to move forward, approaching a road sign indicating a right turn. The bus begins to turn right at the intersection, passing by a tree and a street sign. The bus completes the right turn and continues down the new road, moving past more trees and road signs.</p><code>EXAMPLE=davis_bus bash inference/demo_examples.sh</code></details></article>
+<article><h2>robot_figure0</h2><p>robotics · cow_vggt · 672×384 H×W · vista4d_avocado_slice__close_crane_above</p>
+<p class="badge">Fresh public 14B · 50 steps · CFG 5 · shift 5 · seed 42</p>
+<div class="pair"><div><h3>Source</h3><video controls playsinline preload="none" poster="posters/robot_figure0_source.jpg" data-src="https://huggingface.co/yslan/Holo4D-2026/resolve/974e77018656957a6baf784cbfe9f9788186b5f3/examples/robot_davis10/robot_figure0/source.mp4"></video></div>
+<div><h3>Novel view</h3><video controls playsinline preload="none" poster="posters/robot_figure0_prediction.jpg" data-src="generated/robot_figure0.mp4"></video></div></div>
+<button class="play">Load and play this pair</button><button class="copy" data-command="EXAMPLE=robot_figure0 bash inference/demo_examples.sh">Copy inference command</button>
+<details><summary>Caption and reproduction</summary><p>A white Figure humanoid robot manipulates a black object beside a light-colored rock on a table in a minimalist indoor workspace.</p><code>EXAMPLE=robot_figure0 bash inference/demo_examples.sh</code></details></article>
+<article><h2>robot_figure1</h2><p>robotics · cow_vggt · 672×384 H×W · vista4d_avocado_slice__close_crane_above</p>
+<p class="badge">Archived qualitative reference · recipe may differ; regenerate with the command below</p>
+<div class="pair"><div><h3>Source</h3><video controls playsinline preload="none" poster="posters/robot_figure1_source.jpg" data-src="https://huggingface.co/yslan/Holo4D-2026/resolve/974e77018656957a6baf784cbfe9f9788186b5f3/examples/robot_davis10/robot_figure1/source.mp4"></video></div>
+<div><h3>Novel view</h3><video controls playsinline preload="none" poster="posters/robot_figure1_prediction.jpg" data-src="https://huggingface.co/yslan/Holo4D-2026/resolve/974e77018656957a6baf784cbfe9f9788186b5f3/examples/robot_davis10/robot_figure1/reference.mp4"></video></div></div>
+<button class="play">Load and play this pair</button><button class="copy" data-command="EXAMPLE=robot_figure1 bash inference/demo_examples.sh">Copy inference command</button>
+<details><summary>Caption and reproduction</summary><p>A black-and-white Figure humanoid robot pours liquid from a translucent bottle into cups on a kitchen counter.</p><code>EXAMPLE=robot_figure1 bash inference/demo_examples.sh</code></details></article>
+<article><h2>robot_tesla</h2><p>robotics · cow_vggt · 672×384 H×W · vista4d_avocado_slice__close_crane_above</p>
+<p class="badge">Archived qualitative reference · recipe may differ; regenerate with the command below</p>
+<div class="pair"><div><h3>Source</h3><video controls playsinline preload="none" poster="posters/robot_tesla_source.jpg" data-src="https://huggingface.co/yslan/Holo4D-2026/resolve/974e77018656957a6baf784cbfe9f9788186b5f3/examples/robot_davis10/robot_tesla/source.mp4"></video></div>
+<div><h3>Novel view</h3><video controls playsinline preload="none" poster="posters/robot_tesla_prediction.jpg" data-src="https://huggingface.co/yslan/Holo4D-2026/resolve/974e77018656957a6baf784cbfe9f9788186b5f3/examples/robot_davis10/robot_tesla/reference.mp4"></video></div></div>
+<button class="play">Load and play this pair</button><button class="copy" data-command="EXAMPLE=robot_tesla bash inference/demo_examples.sh">Copy inference command</button>
+<details><summary>Caption and reproduction</summary><p>A black-and-white Tesla humanoid robot walks and balances in an industrial robotics laboratory.</p><code>EXAMPLE=robot_tesla bash inference/demo_examples.sh</code></details></article>
+<article><h2>robot_gupta</h2><p>robotics · 4rc · 384×672 H×W · bmx_front_zoom</p>
+<p class="badge">Archived qualitative reference · recipe may differ; regenerate with the command below</p>
+<div class="pair"><div><h3>Source</h3><video controls playsinline preload="none" poster="posters/robot_gupta_source.jpg" data-src="https://huggingface.co/yslan/Holo4D-2026/resolve/974e77018656957a6baf784cbfe9f9788186b5f3/examples/robot_davis10/robot_gupta/source.mp4"></video></div>
+<div><h3>Novel view</h3><video controls playsinline preload="none" poster="posters/robot_gupta_prediction.jpg" data-src="https://huggingface.co/yslan/Holo4D-2026/resolve/974e77018656957a6baf784cbfe9f9788186b5f3/examples/robot_davis10/robot_gupta/reference.mp4"></video></div></div>
+<button class="play">Load and play this pair</button><button class="copy" data-command="EXAMPLE=robot_gupta bash inference/demo_examples.sh">Copy inference command</button>
+<details><summary>Caption and reproduction</summary><p>A robot arm reaches over a cluttered workbench toward a yellow bowl.</p><code>EXAMPLE=robot_gupta bash inference/demo_examples.sh</code></details></article>
+<article><h2>robot_tri</h2><p>robotics · 4rc · 384×672 H×W · vista4d_avocado_slice__close_crane_above</p>
+<p class="badge">Archived qualitative reference · recipe may differ; regenerate with the command below</p>
+<div class="pair"><div><h3>Source</h3><video controls playsinline preload="none" poster="posters/robot_tri_source.jpg" data-src="https://huggingface.co/yslan/Holo4D-2026/resolve/974e77018656957a6baf784cbfe9f9788186b5f3/examples/robot_davis10/robot_tri/source.mp4"></video></div>
+<div><h3>Novel view</h3><video controls playsinline preload="none" poster="posters/robot_tri_prediction.jpg" data-src="https://huggingface.co/yslan/Holo4D-2026/resolve/974e77018656957a6baf784cbfe9f9788186b5f3/examples/robot_davis10/robot_tri/reference.mp4"></video></div></div>
+<button class="play">Load and play this pair</button><button class="copy" data-command="EXAMPLE=robot_tri bash inference/demo_examples.sh">Copy inference command</button>
+<details><summary>Caption and reproduction</summary><p>An industrial robot arm operates above a white table near another robot base.</p><code>EXAMPLE=robot_tri bash inference/demo_examples.sh</code></details></article></main><script>
+const cards = [...document.querySelectorAll('article')];
+for (const card of cards) {
+  card.querySelector('.play').addEventListener('click', () => {
+    for (const other of cards) if (other !== card) for (const v of other.querySelectorAll('video')) {
+      if (v.hasAttribute('src')) { v.pause(); v.removeAttribute('src'); v.load(); }
+    }
+    for (const v of card.querySelectorAll('video')) {
+      if (!v.hasAttribute('src')) { v.src = v.dataset.src; v.load(); }
+      v.currentTime = 0; v.play().catch(() => {});
+    }
+  });
+  card.querySelector('.copy').addEventListener('click', async event => {
+    const button = event.currentTarget;
+    try { await navigator.clipboard.writeText(button.dataset.command); button.textContent = 'Copied'; }
+    catch { window.prompt('Copy this command:', button.dataset.command); }
+  });
+}
+</script></body></html>

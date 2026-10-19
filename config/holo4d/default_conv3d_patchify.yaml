@@ -1,0 +1,29 @@
+# Track4D-360: Track module configuration with causal Conv3d patchify adapter.
+#
+# Replaces BOTH the PointTrackEmbedder (sinusoidal + MLP + temporal max-pool)
+# and PointTrackAdapter (scatter max-pool) with a unified Conv3dTrackAdapter.
+#
+# Architecture:
+#   sinusoidal encoding → MLP → proj_down → CausalConv3d patchify
+#   → CausalResidualBlock3d × N → proj_up → source-to-target scatter
+#
+# Causal temporal: matches Wan VAE's causal behavior.
+#   latent_t = (T - 1) // 4 + 1  (e.g., T=49 → 13 latent frames)
+#   Conv3d left-pads temporally by (kernel_t - 1), no right padding.
+#
+# Spatial patch_size = spatial_div // conv_track_stride
+#   Wan 2.1 (spatial_div=16): stride=4 → patch_size=4
+#
+# Reference: SimpleAdapter in wan_video_camera_controller.py
+#   (PixelUnshuffle → Conv2d → ResidualBlock × N)
+
+track:
+  in_channels: 5       # (frame_idx, world_x, world_y, world_z, vis)
+  embed_dim: 156
+  num_freqs: 16
+  hidden_dim: 156
+  num_mlp_layers: 3
+  adapter_type: conv3d_patchify
+  conv_proj_dim: 32
+  conv_track_stride: 4   # must match dataset track_spatial_stride
+  conv3d_num_residual_blocks: 1

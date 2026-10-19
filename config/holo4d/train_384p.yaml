@@ -1,0 +1,69 @@
+# 384x672 Holo4D V2V data mix.
+#
+# Purpose: finetune a Holo4D source-depth/source-RGB track-control model at
+# 384p using only the datasets with suitable resolution support:
+#   - 70% dynamic supervision:
+#       * 30% ReCamMaster pair1x49, split into dense q1 (21%) and sparse q1 (9%)
+#       * 40% Syn4D with sparse / multi-query exposure
+#   - 30% static supervision:
+#       * 20% DL3DV
+#       * 10% MVS-Synth
+#
+# Kubric is intentionally omitted for this 384p finetune because its cached
+# frames are square 512x512 and should not carry the dynamic mix at 672x384.
+# RE10K and TartanAir are also omitted so the static budget is concentrated on
+# the stronger 384p candidates.
+#
+# Static data is retained because removing static supervision hurt FVD in the
+# ablation readout. ReCamMaster pair1x49 is dynamic q1-only; multi-query
+# exposure comes from Syn4D.
+
+num_views: 49
+resolution: [672, 384]
+
+syn4d_root: ${oc.env:SYN4D_ROOT}
+syn4d_caption_dir: ${oc.env:SYN4D_CAPTION_DIR}
+syn4d_valid_sequences: config/syn4d_valid_sequences.txt
+dl3dv_root: ${oc.env:DL3DV_ROOT}
+mvs_synth_root: ${oc.env:MVS_SYNTH_ROOT}
+
+recammaster_caption_cache_dir: ${oc.env:RECAMMASTER_CAPTION_CACHE_DIR}
+recammaster_root: ${oc.env:RECAMMASTER_ROOT}
+multicam_fg_mask_root: ${oc.env:MULTICAM_FG_MASK_ROOT}
+recammaster_source49_root: ${oc.env:RECAMMASTER_SOURCE49_ROOT}
+recammaster_pair1x49_label_root: ${oc.env:RECAMMASTER_PAIR1X49_LABEL_ROOT}
+recammaster_cow_root: ${oc.env:RECAMMASTER_COW_ROOT}
+recammaster_scene_offset_per_k: ${oc.env:TRACK4D360_RECAM_SCENE_OFFSET_PER_K,0}
+recammaster_scene_limit_per_k: ${oc.env:TRACK4D360_RECAM_SCENE_LIMIT_PER_K,750}
+
+sparse_track_prob: ${oc.env:TRACK4D360_SPARSE_TRACK_PROB,0.5}
+sparse_track_stride: ${oc.env:TRACK4D360_SPARSE_TRACK_STRIDE,2|4|8}
+sparse_track_query_stride_mode: ${oc.env:TRACK4D360_SPARSE_TRACK_QUERY_STRIDE_MODE,query_count_floor}
+sparse_track_block_jitter_prob: ${oc.env:TRACK4D360_SPARSE_TRACK_BLOCK_JITTER_PROB,0.0}
+sparse_track_block_size: ${oc.env:TRACK4D360_SPARSE_TRACK_BLOCK_SIZE,64}
+multi_query_prob: ${oc.env:TRACK4D360_MULTI_QUERY_PROB,0.5}
+multi_query_choices: ${oc.env:TRACK4D360_MULTI_QUERY_CHOICES,2|3}
+geometry_noise_prob: ${oc.env:TRACK4D360_GEOMETRY_NOISE_PROB,0.0}
+track_offset_std: ${oc.env:TRACK4D360_TRACK_OFFSET_STD,0.0}
+track_temporal_jitter_std: ${oc.env:TRACK4D360_TRACK_TEMPORAL_JITTER_STD,0.0}
+track_xy_noise_ratio: ${oc.env:TRACK4D360_TRACK_XY_NOISE_RATIO,0.0}
+track_frame_depth_jitter_ratio: ${oc.env:TRACK4D360_TRACK_FRAME_DEPTH_JITTER_RATIO,0.0}
+depth_offset_std: ${oc.env:TRACK4D360_DEPTH_OFFSET_STD,0.0}
+depth_scale_jitter: ${oc.env:TRACK4D360_DEPTH_SCALE_JITTER,0.0}
+source_rgb_noise_std: ${oc.env:TRACK4D360_SOURCE_RGB_NOISE_STD,0.0}
+source_rgb_frame_jitter_std: ${oc.env:TRACK4D360_SOURCE_RGB_FRAME_JITTER_STD,0.0}
+dynamic_mask_aug_prob: ${oc.env:TRACK4D360_DYNAMIC_MASK_AUG_PROB,0.0}
+dynamic_mask_morph_kernel: ${oc.env:TRACK4D360_DYNAMIC_MASK_MORPH_KERNEL,5}
+dynamic_mask_flip_prob: ${oc.env:TRACK4D360_DYNAMIC_MASK_FLIP_PROB,0.0}
+
+train_datasets:
+  # 21% ReCamMaster dense q1.
+  - "52500 @ ReCamMasterCowVGGT_NVS(ROOT='${recammaster_root}', vggt_root='${recammaster_source49_root}', source_vggt_root='${recammaster_source49_root}', pair1x49_label_root='${recammaster_pair1x49_label_root}', geometry_source='pair1x49_label_scale_only', cow_root='${recammaster_cow_root}', fg_mask_root='${multicam_fg_mask_root}', caption_cache_dir='${recammaster_caption_cache_dir}', num_views=${num_views}, resolution=${resolution}, steps_per_epoch=52500, return_source_depth_video=True, return_source_rgb_video=True, return_source_cameras=True, vggt_post_crop_mode='cow_aspect', rgb_post_crop_mode='cow_aspect', track_sample_mode='all', track_stride=1, track_samples=0, scene_offset_per_k=${recammaster_scene_offset_per_k}, scene_limit_per_k=${recammaster_scene_limit_per_k})"
+  # 9% ReCamMaster sparse q1.
+  - "22500 @ ReCamMasterCowVGGT_NVS(ROOT='${recammaster_root}', vggt_root='${recammaster_source49_root}', source_vggt_root='${recammaster_source49_root}', pair1x49_label_root='${recammaster_pair1x49_label_root}', geometry_source='pair1x49_label_scale_only', cow_root='${recammaster_cow_root}', fg_mask_root='${multicam_fg_mask_root}', caption_cache_dir='${recammaster_caption_cache_dir}', num_views=${num_views}, resolution=${resolution}, steps_per_epoch=22500, return_source_depth_video=True, return_source_rgb_video=True, return_source_cameras=True, vggt_post_crop_mode='cow_aspect', rgb_post_crop_mode='cow_aspect', track_sample_mode='grid', track_stride=2, track_samples=0, scene_offset_per_k=${recammaster_scene_offset_per_k}, scene_limit_per_k=${recammaster_scene_limit_per_k})"
+  # 40% Syn4D dynamic multi-camera mesh-tracked data.
+  - "100000 @ GeometryRobustnessWrapper_NVS(Syn4D_Multi_NVS(ROOT='${syn4d_root}', caption_dir='${syn4d_caption_dir}', num_views=${num_views}, resolution=${resolution}, steps_per_epoch=100000, track_spatial_stride=1, exclude_scenes=['flying_group'], valid_sequences_file='${syn4d_valid_sequences}', use_mp4_rgb=True, return_source_depth_video=True, return_source_rgb_video=True, return_source_cameras=True, return_dynamic_masks=True, multi_query_prob=${multi_query_prob}, multi_query_choices='${multi_query_choices}'), sparse_track_prob=${sparse_track_prob}, sparse_track_stride='${sparse_track_stride}', sparse_track_query_stride_mode='${sparse_track_query_stride_mode}', sparse_track_block_jitter_prob=${sparse_track_block_jitter_prob}, sparse_track_block_size=${sparse_track_block_size}, multi_query_prob=${multi_query_prob}, multi_query_choices='${multi_query_choices}', noise_prob=${geometry_noise_prob}, track_offset_std=${track_offset_std}, track_temporal_jitter_std=${track_temporal_jitter_std}, track_xy_noise_ratio=${track_xy_noise_ratio}, track_frame_depth_jitter_ratio=${track_frame_depth_jitter_ratio}, depth_offset_std=${depth_offset_std}, depth_scale_jitter=${depth_scale_jitter}, source_rgb_noise_std=${source_rgb_noise_std}, source_rgb_frame_jitter_std=${source_rgb_frame_jitter_std}, dynamic_mask_aug_prob=${dynamic_mask_aug_prob}, dynamic_mask_morph_kernel=${dynamic_mask_morph_kernel}, dynamic_mask_flip_prob=${dynamic_mask_flip_prob})"
+  # 20% DL3DV static real data with DA3 depth.
+  - "50000 @ StaticScene_NVS(ROOT='${dl3dv_root}', dataset_type='dl3dv', num_views=${num_views}, resolution=${resolution}, steps_per_epoch=50000, track_spatial_stride=1, min_overlap_ratio=0.25, min_shift_ratio=0.15, max_shift_ratio=0.5, shift_beta_ab=[2.0, 5.0], src_center_in_target_prob=0.5, return_source_depth_video=True, return_source_rgb_video=True, return_source_cameras=True, use_da3_depth=True)"
+  # 10% MVS-Synth static synthetic data; scene 0000 is held out.
+  - "25000 @ StaticScene_NVS(ROOT='${mvs_synth_root}', dataset_type='mvs_synth', num_views=${num_views}, resolution=${resolution}, steps_per_epoch=25000, track_spatial_stride=1, min_overlap_ratio=0.25, return_source_depth_video=True, return_source_rgb_video=True, return_source_cameras=True, exclude_sequence_ids=['0000'])"

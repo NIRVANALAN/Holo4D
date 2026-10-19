@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "holo4d"
+version = "0.1.0"
+description = "Holo4D / Track4D-360: geometry-conditioned novel-view video generation"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+license = {file = "LICENSE"}
+authors = [{name = "Yushi Lan"}]
+dependencies = [
+  "accelerate>=0.25",
+  "av==15.1.0",
+  "diffusers==0.33.1",
+  "einops",
+  "ftfy",
+  "func_timeout",
+  "h5py",
+  "librosa",
+  "lightning",
+  "huggingface_hub>=0.26",
+  "imageio[ffmpeg,pyav]",
+  "lpips",
+  "mediapy>=1.2.4",
+  "numpy>=2.0,<2.8",
+  "omegaconf",
+  "opencv-python",
+  "packaging",
+  "pandas",
+  "Pillow",
+  "PyYAML",
+  "regex",
+  "safetensors",
+  "scikit-image",
+  "scikit-learn>=1.7.2",
+  "scipy",
+  "sentencepiece",
+  "torch>=2.5,<3",
+  "torchdiffeq",
+  "torchvision>=0.20,<1",
+  "torchsde",
+  "torchmetrics",
+  "tqdm",
+  "transformers==4.46.2",
+  "timm",
+]
+
+[project.scripts]
+holo4d-download = "holo4d.hub:main"
+
+[project.urls]
+Repository = "https://github.com/NIRVANALAN/Holo4D"
+Models = "https://huggingface.co/yslan/Holo4D-2026"
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+eval = ["evo==1.37.0"]
+
+# Install this group in a separate environment with `pip install --group vbench`.
+# VBench0.1.5 requires NumPy1.x; inference deliberately keeps its NumPy2 stack.
+[dependency-groups]
+vbench = ["vbench==0.1.5", "numpy>=1.26,<2", "imageio[ffmpeg]", "Pillow"]
+
+[tool.setuptools.packages.find]
+include = ["holo4d*", "holo4d_runtime*"]
+
+[tool.setuptools.package-data]
+holo4d_runtime = ["data/stream3r/dust3r/datasets/aria/*.png"]
+
+[tool.pytest.ini_options]
+testpaths = ["holo4d/tests"]
+addopts = "--import-mode=importlib"

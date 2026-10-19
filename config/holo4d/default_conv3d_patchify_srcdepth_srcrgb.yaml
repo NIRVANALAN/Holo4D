@@ -1,0 +1,18 @@
+# Track4D-360: Conv3d patchify + source depth + source RGB at track positions.
+#
+# Channels: (frame_idx, world_x, world_y, world_z, vis, source_depth, src_R, src_G, src_B)
+#
+# This is the point-RGBD track-branch variant: the RGB/depth information is
+# attached to each 3D track identity and encoded by the Conv3D track adapter,
+# instead of going through the separate dense target-control branch.
+
+track:
+  in_channels: 9
+  embed_dim: 156
+  num_freqs: 16
+  hidden_dim: 156
+  num_mlp_layers: 3
+  adapter_type: conv3d_patchify
+  conv_proj_dim: 32
+  conv_track_stride: 4
+  conv3d_num_residual_blocks: 1
