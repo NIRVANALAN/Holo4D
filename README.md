@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://nirvanalan.github.io/projects/holo4d"><img src="https://img.shields.io/badge/🐳-Project%20Page-blue"></a>
-  <a href="https://nirvanalan.github.io/projects/holo4d/static/pdfs/holo4d-paper.pdf"><img src="https://img.shields.io/badge/Paper-PDF-b31b1b.svg"></a>
+  <a href="https://arxiv.org/abs/2610.25276"><img src="https://img.shields.io/badge/arXiv-2610.25276-b31b1b.svg"></a>
   <a href="https://huggingface.co/yslan/Holo4D-2026"><img src="https://img.shields.io/badge/🤗-Models%20%26%20Examples-yellow"></a>
   <img src="https://visitor-badge.laobi.icu/badge?page_id=NIRVANALAN.Holo4D">
 </p>
@@ -206,7 +206,7 @@ See [doc/visualization.md](doc/visualization.md).
 | Holo4D-14B<sup>α</sup> | 13.22 | 0.484 | 0.435 | 12.68 | 0.326 | 0.509 |
 | **Holo4D-14B<sup>β</sup>** | **14.03** | 0.507 | **0.379** | **13.20** | 0.348 | **0.465** |
 
-Read our [paper](https://nirvanalan.github.io/projects/holo4d/static/pdfs/holo4d-paper.pdf) for Vista4D's 110 trajectories, Syn4D, reconstructor swaps and robot policy learning.
+Read our [paper](https://arxiv.org/abs/2610.25276) for Vista4D's 110 trajectories, Syn4D, reconstructor swaps and robot policy learning.
 
 ## ⏳ Runtime and Memory
 
