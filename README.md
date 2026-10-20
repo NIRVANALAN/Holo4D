@@ -333,14 +333,6 @@ If you find our code or paper helps, please consider citing:
   journal = {arXiv preprint arXiv:2610.25276},
   year    = {2026}
 }
-
-% NeurIPS 2026 version (switch to this once the proceedings are online):
-% @inproceedings{lan2026holo4d,
-%   title     = {{Holo4D}: Holistic 4D Reconstruction as Geometric Control for Video Diffusion},
-%   author    = {Lan, Yushi and Jiang, Zeren and Namekata, Koichi and Pan, Xingang and Zheng, Chuanxia and Vedaldi, Andrea},
-%   booktitle = {Advances in Neural Information Processing Systems},
-%   year      = {2026}
-% }
 ```
 
 ## :pencil: Acknowledgments
